@@ -72,31 +72,31 @@ Analytics.Demo_Lookup s1
 ON
       e.segid1 = s1.Segment_ID
 LEFT JOIN
-      Analytics.jlm_Demo_Lookup s2
+      Analytics.Demo_Lookup s2
 ON
       e.segid2 = s2.Segment_ID
 LEFT JOIN
-      Analytics.jlm_Demo_Lookup s3
+      Analytics.Demo_Lookup s3
 ON
       e.segid3 = s3.Segment_ID
 LEFT JOIN
-      Analytics.jlm_Demo_Lookup s4
+      Analytics.Demo_Lookup s4
 ON
       e.segid4 = s4.Segment_ID
 LEFT JOIN
-      Analytics.jlm_Demo_Lookup s5
+      Analytics.Demo_Lookup s5
 ON
       e.segid5 = s5.Segment_ID
 LEFT JOIN
-      Analytics.jlm_Demo_Lookup s6
+      Analytics.Demo_Lookup s6
 ON
       e.segid6 = s6.Segment_ID
 LEFT JOIN
-      Analytics.jlm_Demo_Lookup s7
+      Analytics.Demo_Lookup s7
 ON
       e.segid7 = s7.Segment_ID
 LEFT JOIN
-      Analytics.jlm_Demo_Lookup s8
+      Analytics.Demo_Lookup s8
 ON
       e.segid8 = s8.Segment_ID
 DISTRIBUTED BY (idfa);
@@ -154,7 +154,7 @@ ORDER BY time_id;
 **********************************************************************************/
 
 DROP TABLE IF EXISTS qa_metrics;
-create temp table qa_metrics
+CREATE TEMP TABLE qa_metrics
 AS 
 (SELECT time_id, 'no. of records'::character varying AS metric, count(*) AS record_count FROM jli_Demos GROUP BY 1) union all
 (SELECT time_id, 'no. of idfAS'::character varying AS metric, count(idfa) AS idfa_count FROM( SELECT time_id, idfa FROM jli_Demos GROUP BY 1,2 ) a GROUP BY 1)union all
@@ -194,6 +194,6 @@ ENCODING 'utf8';
  -- insert contents into writable table
  -- EXPLAIN
 INSERT INTO qa
- SELECT *
- FROM qa_metrics
- ORDER BY time_id;
+SELECT *
+FROM qa_metrics
+ORDER BY time_id;
