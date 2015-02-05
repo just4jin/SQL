@@ -109,27 +109,60 @@ DISTRIBUTED BY (idfa);
 ********************************************************************************************/
 
 -- no of records with age2
-SELECT time_id, count(*) AS age2_record_count FROM jli_Demos WHERE age2!='' GROUP BY 1;
-SELECT time_id, age2, count(*) AS record_count FROM jli_Demos WHERE age2!='' GROUP BY 1,2 ORDER BY 1,2;
+SELECT time_id, count(*) AS age2_record_count 
+FROM jli_Demos 
+WHERE age2!='' 
+GROUP BY 1;
+
+SELECT time_id, age2, count(*) AS record_count 
+FROM jli_Demos 
+WHERE age2!='' 
+GROUP BY 1,2 
+ORDER BY 1,2;
 
 
 -- no of idfa with age2
-SELECT time_id, count(*) AS age2_record_count FROM jli_Demos WHERE age2!='' GROUP BY 1;
-SELECT time_id, count(idfa) AS age2_idfa_count FROM(SELECT time_id, idfa FROM jli_Demos WHERE age2!='' GROUP BY 1,2 ) a GROUP BY 1
+SELECT time_id, count(*) AS age2_record_count 
+FROM jli_Demos 
+WHERE age2!='' 
+GROUP BY 1;
+
+SELECT time_id, count(idfa) AS age2_idfa_count 
+FROM(SELECT time_id, idfa 
+	FROM jli_Demos 
+	WHERE age2!='' 
+	GROUP BY 1,2) a 
+GROUP BY 1
 
 -- gender
-SELECT time_id, count(*) AS gender_record_count FROM jli_Demos WHERE gender!='' GROUP BY 1 ORDER BY 1
+SELECT time_id, count(*) AS gender_record_count 
+FROM jli_Demos 
+WHERE gender!='' 
+GROUP BY 1 
+ORDER BY 1;
+
 SELECT a.time_id, count(a.idfa) AS gender_idfa_count
 FROM(
-SELECT time_id, idfa FROM jli_Demos WHERE gender!='' GROUP BY 1,2 ) a
+	SELECT time_id, idfa 
+	FROM jli_Demos 
+	WHERE gender!='' 
+	GROUP BY 1,2 ) a
 GROUP BY 1
 ORDER BY 1;
 
 -- age
-SELECT time_id, count(*) AS age_record_count FROM jli_Demos WHERE age!='' GROUP BY 1 ORDER BY 1;
+SELECT time_id, count(*) AS age_record_count 
+FROM jli_Demos 
+WHERE age!='' 
+GROUP BY 1 
+ORDER BY 1;
+
 SELECT a.time_id, count(a.idfa) AS age_idfa_count
 FROM(
-SELECT time_id, idfa FROM jli_Demos WHERE age!='' GROUP BY 1,2 ) a
+	SELECT time_id, idfa 
+	FROM jli_Demos 
+	WHERE age!='' 
+	GROUP BY 1,2 ) a
 GROUP BY 1
 ORDER BY 1;
 
@@ -156,16 +189,76 @@ ORDER BY time_id;
 DROP TABLE IF EXISTS qa_metrics;
 CREATE TEMP TABLE qa_metrics
 AS 
-(SELECT time_id, 'no. of records'::character varying AS metric, count(*) AS record_count FROM jli_Demos GROUP BY 1) union all
-(SELECT time_id, 'no. of idfAS'::character varying AS metric, count(idfa) AS idfa_count FROM( SELECT time_id, idfa FROM jli_Demos GROUP BY 1,2 ) a GROUP BY 1)union all
-(SELECT time_id, 'no. of records without gender2'::character varying AS metric, count(*) AS gender2_count FROM jli_Demos WHERE gender2='' GROUP BY 1) union all
-(SELECT time_id, 'no. of records without age2'::character varying AS metric,count(*) AS age2_count FROM jli_Demos WHERE age2='' GROUP BY 1)union all
-(SELECT time_id, 'no. of idfAS with gender2 male'::character varying AS metric,count(idfa) AS male_count FROM jli_Demos WHERE gender2='Male' GROUP BY 1)union all
-(SELECT time_id, 'no. of idfAS with gender2 female'::character varying AS metric, count(idfa) AS female_count FROM jli_Demos WHERE gender2='Female' GROUP BY 1)union all
-(SELECT time_id, 'no. of idfAS with gender male'::character varying AS metric, count(idfa) FROM jli_Demos WHERE gender='Male' GROUP BY 1,2) union all
-(SELECT time_id, 'no. of idfAS with gender female'::character varying AS metric, count(idfa) FROM jli_Demos WHERE gender='Female' GROUP BY 1,2) union all
-(SELECT time_id, 'no. of idfAS with age'::character varying AS metric, age, count(idfa) FROM jli_Demos WHERE age!='' GROUP BY 1,2)union all
-(SELECT time_id, 'no. of idfAS with same gender/gender2 and age/age2 values'::character varying AS metric, count(idfa) AS idfa_count FROM jli_Demos WHERE age=age2 and age!='' and age2!='' and gender=gender2 and gender!='' and gender2!='' GROUP BY time_id)
+(
+	SELECT time_id, 'no. of records'::character varying AS metric, count(*) AS record_count 
+	FROM jli_Demos 
+	GROUP BY 1
+) 
+UNION ALL
+(
+	SELECT time_id, 'no. of idfAS'::character varying AS metric, count(idfa) AS idfa_count 
+	FROM( 
+		SELECT time_id, idfa 
+		FROM jli_Demos 
+		GROUP BY 1,2 ) a 
+	GROUP BY 1
+)
+UNION ALL
+(
+	SELECT time_id, 'no. of records without gender2'::character varying AS metric, count(*) AS gender2_count 
+	FROM jli_Demos 
+	WHERE gender2='' 
+	GROUP BY 1
+) 
+UNION ALL
+(
+	SELECT time_id, 'no. of records without age2'::character varying AS metric,count(*) AS age2_count 
+	FROM jli_Demos 
+	WHERE age2='' 
+	GROUP BY 1
+)
+UNION ALL
+(
+	SELECT time_id, 'no. of idfAS with gender2 male'::character varying AS metric,count(idfa) AS male_count 
+	FROM jli_Demos 
+	WHERE gender2='Male' 
+	GROUP BY 1
+)
+UNION ALL
+(
+	SELECT time_id, 'no. of idfAS with gender2 female'::character varying AS metric, count(idfa) AS female_count 
+	FROM jli_Demos 
+	WHERE gender2='Female' 
+	GROUP BY 1
+)
+UNION ALL
+(
+	SELECT time_id, 'no. of idfAS with gender male'::character varying AS metric, count(idfa) 
+	FROM jli_Demos 
+	WHERE gender='Male' 
+	GROUP BY 1,2
+)
+UNION ALL
+(
+	SELECT time_id, 'no. of idfAS with gender female'::character varying AS metric, count(idfa) 
+	FROM jli_Demos 
+	WHERE gender='Female' 
+	GROUP BY 1,2
+) 
+UNION ALL
+(
+	SELECT time_id, 'no. of idfAS with age'::character varying AS metric, age, count(idfa) 
+	FROM jli_Demos 
+	WHERE age!='' 
+	GROUP BY 1,2
+)
+UNION ALL
+(
+	SELECT time_id, 'no. of idfAS with same gender/gender2 and age/age2 values'::character varying AS metric, count(idfa) AS idfa_count 
+	FROM jli_Demos 
+	WHERE age=age2 and age!='' and age2!='' and gender=gender2 and gender!='' and gender2!='' 
+	GROUP BY time_id
+)
 DISTRIBUTED BY (time_id);
 
 /*********************************************************************************
