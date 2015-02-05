@@ -7,6 +7,8 @@ Output: validation notice
 
 note: demographics labels and table names used here are arbitrary
 
+Jin Li
+
 ***************************************************************************/
 
 CREATE OR REPLACE FUNCTION demo_validation_jli( month_id int, week_id int, client_name character varying,
