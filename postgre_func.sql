@@ -12,7 +12,11 @@ Age2
 
 ******************************************************************************/
 
--- Create Data Demo
+/***************************************************************************
+
+	Match with Lookup Table
+	
+****************************************************************************/
 DROP TABLE IF EXISTS jli_Demos;
 CREATE TEMP TABLE jli_Demos 
 WITH (APPENDONLY=TRUE, ORIENTATION=COLUMN, COMPRESSTYPE=ZLIB, COMPRESSLEVEL=9) AS
@@ -64,7 +68,7 @@ CASE
   END AS Age2      
 FROM public.data e
 LEFT JOIN 
-Analytics.jlm_Demo_Lookup s1
+Analytics.Demo_Lookup s1
 ON
       e.segid1 = s1.Segment_ID
 LEFT JOIN
@@ -145,7 +149,7 @@ ORDER BY time_id;
 
 /**********************************************************************************
 
-FINAL RESULT TABLE
+	FINAL RESULT TABLE
 
 **********************************************************************************/
 
@@ -166,7 +170,7 @@ DISTRIBUTED BY (time_id);
 
 /*********************************************************************************
 
-    EXPORT INTO .TXT
+	EXPORT INTO .TXT
 
  ********************************************************************************/
 
