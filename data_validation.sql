@@ -45,25 +45,25 @@ CASE
     ELSE ''
   END AS Gender2,
 CASE
-    WHEN s1.Demo_Group = 'Household Age' THEN s1.Demo_Value
-    WHEN s2.Demo_Group = 'Household Age' THEN s2.Demo_Value
-    WHEN s3.Demo_Group = 'Household Age' THEN s3.Demo_Value
-    WHEN s4.Demo_Group = 'Household Age' THEN s4.Demo_Value
-    WHEN s5.Demo_Group = 'Household Age' THEN s5.Demo_Value
-    WHEN s6.Demo_Group = 'Household Age' THEN s6.Demo_Value
-    WHEN s7.Demo_Group = 'Household Age' THEN s7.Demo_Value
-    WHEN s8.Demo_Group = 'Household Age' THEN s8.Demo_Value
+    WHEN s1.Demo_Group = 'Age' THEN s1.Demo_Value
+    WHEN s2.Demo_Group = 'Age' THEN s2.Demo_Value
+    WHEN s3.Demo_Group = 'Age' THEN s3.Demo_Value
+    WHEN s4.Demo_Group = 'Age' THEN s4.Demo_Value
+    WHEN s5.Demo_Group = 'Age' THEN s5.Demo_Value
+    WHEN s6.Demo_Group = 'Age' THEN s6.Demo_Value
+    WHEN s7.Demo_Group = 'Age' THEN s7.Demo_Value
+    WHEN s8.Demo_Group = 'Age' THEN s8.Demo_Value
     ELSE ''
   END AS Age,
 CASE
-    WHEN s1.Demo_Group = 'Household Age2' THEN s1.Demo_Value
-    WHEN s2.Demo_Group = 'Household Age2' THEN s2.Demo_Value
-    WHEN s3.Demo_Group = 'Household Age2' THEN s3.Demo_Value
-    WHEN s4.Demo_Group = 'Household Age2' THEN s4.Demo_Value
-    WHEN s5.Demo_Group = 'Household Age2' THEN s5.Demo_Value
-    WHEN s6.Demo_Group = 'Household Age2' THEN s6.Demo_Value
-    WHEN s7.Demo_Group = 'Household Age2' THEN s7.Demo_Value
-    WHEN s8.Demo_Group = 'Household Age2' THEN s8.Demo_Value
+    WHEN s1.Demo_Group = 'Age2' THEN s1.Demo_Value
+    WHEN s2.Demo_Group = 'Age2' THEN s2.Demo_Value
+    WHEN s3.Demo_Group = 'Age2' THEN s3.Demo_Value
+    WHEN s4.Demo_Group = 'Age2' THEN s4.Demo_Value
+    WHEN s5.Demo_Group = 'Age2' THEN s5.Demo_Value
+    WHEN s6.Demo_Group = 'Age2' THEN s6.Demo_Value
+    WHEN s7.Demo_Group = 'Age2' THEN s7.Demo_Value
+    WHEN s8.Demo_Group = 'Age2' THEN s8.Demo_Value
     ELSE ''
   END AS Age2      
 FROM public.data e
