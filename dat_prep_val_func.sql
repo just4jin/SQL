@@ -1,6 +1,6 @@
 /**************************************************************************
 
-3rd party data validation function
+3rd party data pre-processing and validation function
 
 Input: time id, client id, demographics labels, 3rd party data table
 Output: validation notice
