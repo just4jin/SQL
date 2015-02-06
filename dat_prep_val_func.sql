@@ -124,7 +124,7 @@ EXECUTE($$
 		        WHEN a.label1 = 'No'      THEN 'Not Present' 
 		        ELSE ''
 		END,
-		b.label2,
+		b.label1,
 		CASE
 		        WHEN b.label1  = 0         THEN 'Not Present'
 		        WHEN b.label1  = 1         THEN 'Present'
